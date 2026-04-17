@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ARCHIVE_11 // SYSTEM COLLAPSE</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Share Tech Mono", monospace;
+      }
+
+      body {
+        background: #050000;
+        color: #ff4d4d;
+        overflow-x: hidden;
+      }
+
+      /* SCANLINES */
+      body::before {
+        content: "";
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 0, 0, 0.05),
+          rgba(255, 0, 0, 0.05) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+        pointer-events: none;
+      }
+
+      /* CRACK OVERLAY */
+      .crack {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: url("https://static.vecteezy.com/system/resources/thumbnails/010/055/414/small/glass-cracked-and-debris-on-black-background-free-photo.jpg");
+        opacity: 0.15;
+        pointer-events: none;
+        mix-blend-mode: multiply;
+      }
+
+      /* BOOT TERMINAL */
+      #boot {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: black;
+        color: #ff2a2a;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 40px;
+        z-index: 9999;
+      }
+
+      .boot-line {
+        text-shadow: 0 0 10px red;
+        margin: 5px 0;
+      }
+
+      /* MAIN */
+      #main {
+        display: none;
+        animation: appear 1s ease;
+      }
+
+      @keyframes appear {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* GLITCH TEXT */
+      .glitch {
+        position: relative;
+        animation: flicker 2s infinite;
+      }
+
+      .glitch::before,
+      .glitch::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+      }
+
+      .glitch::before {
+        color: #ff0000;
+        animation: g1 0.8s infinite;
+      }
+
+      .glitch::after {
+        color: #ffffff;
+        animation: g2 0.8s infinite;
+      }
+
+      @keyframes g1 {
+        0% {
+          transform: translate(1px, -1px);
+        }
+        50% {
+          transform: translate(-2px, 2px);
+        }
+        100% {
+          transform: translate(1px, -1px);
+        }
+      }
+
+      @keyframes g2 {
+        0% {
+          transform: translate(-1px, 0);
+        }
+        50% {
+          transform: translate(2px, 1px);
+        }
+        100% {
+          transform: translate(-1px, 0);
+        }
+      }
+
+      @keyframes flicker {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+
+      /* HEADER */
+      header {
+        text-align: center;
+        padding: 40px;
+      }
+
+      /* COLLEGE */
+      .college {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid red;
+        background: #0d0000;
+        box-shadow: 0 0 10px red;
+      }
+
+      /* LEADER */
+      .leader {
+        margin: 30px;
+        padding: 20px;
+        border: 2px solid red;
+        background: #140000;
+        text-align: center;
+        box-shadow: 0 0 20px red;
+      }
+
+      .leader a {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 15px;
+        border: 1px solid red;
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .leader a:hover {
+        background: red;
+      }
+
+      /* GRID */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
+
+      /* CARD */
+      .card {
+        border: 1px solid red;
+        padding: 15px;
+        background: #0a0000;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* SIGNAL ANIMATIONS */
+      @keyframes strongPulse {
+        0% {
+          box-shadow: 0 0 10px red;
+        }
+        50% {
+          box-shadow: 0 0 25px red;
+        }
+        100% {
+          box-shadow: 0 0 10px red;
+        }
+      }
+
+      @keyframes mediumPulse {
+        0% {
+          box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 12px rgba(255, 0, 0, 0.8);
+        }
+        100% {
+          box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+      }
+
+      @keyframes weakFlicker {
+        0%,
+        100% {
+          box-shadow: 0 0 3px rgba(255, 0, 0, 0.3);
+          opacity: 0.6;
+        }
+        50% {
+          box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+          opacity: 0.8;
+        }
+      }
+
+      .strong {
+        animation: strongPulse 2s infinite;
+      }
+
+      .medium {
+        animation: mediumPulse 2.5s infinite;
+      }
+
+      .weak {
+        animation: weakFlicker 3s infinite;
+      }
+
+      /* GLITCH LINE */
+      .card::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: red;
+        top: 50%;
+        left: -100%;
+        animation: line 3s infinite;
+      }
+
+      @keyframes line {
+        0% {
+          left: -100%;
+        }
+        50% {
+          left: 100%;
+        }
+        100% {
+          left: -100%;
+        }
+      }
+
+      /* GALLERY */
+      .gallery {
+        padding: 20px;
+      }
+
+      .gallery h2 {
+        margin-bottom: 10px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+      }
+
+      .gallery img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        filter: grayscale(60%) contrast(120%);
+        animation: imgGlitch 3s infinite;
+      }
+
+      /* BREAK */
+      @keyframes break {
+        50% {
+          transform: skew(3deg);
+        }
+      }
+      .break {
+        animation: break 0.2s;
+      }
+      @keyframes imgGlitch {
+        0%,
+        90%,
+        100% {
+          filter: grayscale(60%) contrast(120%);
+        }
+        95% {
+          filter: grayscale(100%) contrast(80%) brightness(80%);
+        }
+        97% {
+          filter: grayscale(0%) contrast(100%) brightness(100%);
+        }
+      }
+      /* FOOTER */
+      footer {
+        text-align: center;
+        padding: 30px;
+        opacity: 0.6;
+        animation: footerFade 4s infinite;
+      }
+
+      @keyframes footerFade {
+        0%,
+        100% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="crack"></div>
+
+    <!-- BOOT -->
+    <div id="boot"></div>
+
+    <div id="main">
+      <header>
+        <h1 class="glitch" data-text="ARCHIVE_11">ARCHIVE_11</h1>
+        <p class="glitch" data-text="[ SYSTEM FAILURE ]">[ SYSTEM FAILURE ]</p>
+      </header>
+
+      <section class="college glitch">
+        <h2>Bogura Polytechnic Institute</h2>
+        <p>
+          Department: Computer Science & Technology (CST)<br /><br />
+          This system stores records of 11 students.<br />
+          Data corruption detected after unknown catastrophic event.<br />
+          Most files are unstable.
+        </p>
+      </section>
+
+      <section class="leader glitch">
+        <h2>MEMBER_01</h2>
+        <p>Name: Unidentified</p>
+        <p>Status: STRONG SIGNAL</p>
+        <a href="715474/715474.html" target="_blank">ACCESS</a>
+      </section>
+
+      <section class="grid">
+        <div class="card strong glitch">
+          <h3>MEMBER_02 (715492)</h3>
+          <p>Female | CST</p>
+          <p>Status: stable</p>
+          <a href="715492.html" target="_blank">OPEN</a>
+        </div>
+
+        <div class="card medium glitch">
+          <h3>MEMBER_03 (715491)</h3>
+          <p>Female | CST</p>
+          <p>Status: unstable</p>
+          <a href="715491.html" target="_blank">OPEN</a>
+        </div>
+
+        <div class="card weak glitch">
+          <h3>MEMBER_04 (715490)</h3>
+          <p>Male | CST</p>
+          <p>Status: lost</p>
+          <a href="715490.html" target="_blank">OPEN</a>
+        </div>
+
+        <div class="card medium glitch">
+          <h3>MEMBER_05 (715486)</h3>
+          <p>Female | CST</p>
+          <p>Status: archived</p>
+          <a href="715486.html" target="_blank">OPEN</a>
+        </div>
+
+        <div class="card strong glitch">
+          <h3>MEMBER_06 (715483)</h3>
+          <p>Female | CST</p>
+          <p>Status: active</p>
+          <a href="715483.html" target="_blank">OPEN</a>
+        </div>
+
+        <div class="card weak glitch">
+          <h3>MEMBER_07 (715473)</h3>
+          <p>Male | CST</p>
+          <p>Status: fading</p>
+          <a href="715473.html" target="_blank">OPEN</a>
+        </div>
+
+        <div class="card medium glitch">
+          <h3>MEMBER_08 (715462)</h3>
+          <p>Female | CST</p>
+          <p>Status: broken</p>
+          <a href="715462.html" target="_blank">OPEN</a>
+        </div>
+
+        <div class="card strong glitch">
+          <h3>MEMBER_09 (715458)</h3>
+          <p>Female | CST</p>
+          <p>Status: glitch detected</p>
+          <a href="715458.html" target="_blank">OPEN</a>
+        </div>
+
+        <div class="card weak glitch">
+          <h3>MEMBER_10 (616321)</h3>
+          <p>Female | CST</p>
+          <p>Status: low signal</p>
+          <a href="616321/index.html" target="_blank">OPEN</a>
+        </div>
+
+        <div class="card medium glitch">
+          <h3>MEMBER_11 (741086)</h3>
+          <p>Male | CST</p>
+          <p>Status: unstable</p>
+          <a href="741086.html" target="_blank">OPEN</a>
+        </div>
+      </section>
+
+      <!-- GALLERY -->
+      <section class="gallery">
+        <h2 class="glitch" data-text="MEMORY FRAGMENTS">MEMORY FRAGMENTS</h2>
+        <div class="gallery-grid">
+          <img
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1509062522246-3755977927d7"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1513258496099-48168024aec0"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1492724441997-5dc865305da7"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=300&h=200&fit=crop"
+          />
+        </div>
+      </section>
+
+      <footer class="glitch">
+        <p>WARNING: SYSTEM COLLAPSE IMMINENT</p>
+      </footer>
+    </div>
+
+    <script>
+      /* TERMINAL TYPE EFFECT WITH GLITCH */
+      const bootLines = [
+        "Initializing CST Archive...",
+        "Loading Bogura Polytechnic Institute...",
+        "Recovering student data...",
+        "ERROR: FILE SYSTEM DAMAGED",
+        "Attempting reconstruction...",
+        "ACCESS GRANTED.........",
+      ];
+
+      const bootContainer = document.getElementById("boot");
+
+      let lineIndex = 0;
+
+      function typeLine(text, callback) {
+        let i = 0;
+        const div = document.createElement("div");
+        div.classList.add("boot-line");
+        bootContainer.appendChild(div);
+
+        const interval = setInterval(() => {
+          let char = text[i];
+
+          // random glitch char
+          // if(Math.random() > 0.8){
+          //   char = String.fromCharCode(33 + Math.random()*94);
+          // }
+
+          div.textContent += char;
+          i++;
+
+          if (i >= text.length) {
+            clearInterval(interval);
+            setTimeout(callback, 300);
+          }
+        }, 30);
+      }
+
+      function runBoot() {
+        if (lineIndex < bootLines.length) {
+          typeLine(bootLines[lineIndex], () => {
+            lineIndex++;
+            runBoot();
+          });
+        } else {
+          setTimeout(() => {
+            document.getElementById("boot").style.display = "none";
+            document.getElementById("main").style.display = "block";
+          }, 500);
+        }
+      }
+
+      runBoot();
+
+      /* SCREEN BREAK */
+      setInterval(() => {
+        document.body.classList.add("break");
+        setTimeout(() => document.body.classList.remove("break"), 200);
+      }, 4000);
+    </script>
+  </body>
+</html>

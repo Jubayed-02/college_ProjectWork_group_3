@@ -1,0 +1,64 @@
+:root {
+    --primary: #00ff9f; 
+    --accent: #00b8ff;  
+    --bg: #05060a;
+    --card: #0d1117;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none; }
+body { background: var(--bg); color: #fff; font-family: 'Courier New', monospace; scroll-behavior: smooth; line-height: 1.6; overflow-x: hidden; }
+
+.scanline { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%); background-size: 100% 4px; z-index: 1000; pointer-events: none; }
+
+header { display: flex; justify-content: space-between; padding: 20px 8%; position: sticky; top: 0; background: rgba(5,6,10,0.95); border-bottom: 1px solid #1a2030; z-index: 500; }
+.blink { animation: blink 1.5s infinite; color: var(--primary); font-weight: bold; }
+@keyframes blink { 50% { opacity: 0; } }
+nav a { color: #888; margin-left: 20px; font-size: 13px; font-weight: bold; }
+nav a:hover { color: var(--primary); }
+
+.hero { height: 90vh; display: flex; align-items: center; justify-content: space-between; padding: 0 10%; }
+h1 { font-size: 100px; line-height: 0.9; margin: 20px 0; letter-spacing: -3px; }
+.glow { color: var(--primary); text-shadow: 0 0 20px rgba(0,255,159,0.5); }
+.sub { color: #888; font-size: 18px; max-width: 500px; }
+
+/* গোল ছবির স্টাইল */
+.round-frame {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 3px solid var(--primary);
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(0, 255, 159, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.round-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+.section { padding: 100px 10%; border-top: 1px solid #1a2030; min-height: 80vh; }
+.title { font-size: 32px; color: var(--accent); margin-bottom: 40px; }
+
+.bio-grid { display: flex; gap: 50px; }
+.bio-text { flex: 2; font-size: 18px; color: #aaa; }
+.system-stats { flex: 1; color: var(--primary); font-size: 14px; border-left: 1px solid #333; padding-left: 20px; }
+
+/* Skills Styling */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.skill-box { padding: 25px; border: 1px solid #1a2030; background: var(--card); }
+.skill-box h3 { color: var(--primary); margin-bottom: 10px; font-size: 18px; }
+.skill-box p { font-size: 14px; color: #888; }
+
+.project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+.project-card { padding: 25px; border: 1px solid #1a2030; background: var(--card); transition: 0.3s; height: 100%; }
+.project-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+.tag { font-size: 11px; color: var(--primary); border: 1px solid var(--primary); padding: 2px 8px; }
+
+.highlight { color: var(--primary); text-decoration: underline; }
+.map-link { color: #aaa; }
+.map-link:hover { color: var(--primary); }
+.map-icon { font-size: 11px; margin-left: 10px; color: var(--accent); border: 1px solid var(--accent); padding: 2px 5px; }
+
+.btn { display: inline-block; padding: 12px 30px; border: 1px solid var(--primary); color: var(--primary); font-weight: bold; margin-top: 20px; }
+.btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary); }
+
+footer { text-align: center; padding: 40px; color: #444; font-size: 12px; border-top: 1px solid #1a2030; }
